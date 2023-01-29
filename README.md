@@ -1,5 +1,5 @@
 # PlayNuvem
-![Badge Status](http://img.shields.io/static/v1?label=Status&message=Em%Desenvolvimento&color=GREEN&style=fleat)
+![Badge Status](http://img.shields.io/static/v1?label=Status&message=Em Desenvolvimento&color=GREEN&style=fleat)
 
 # Sobre o projeto
 
