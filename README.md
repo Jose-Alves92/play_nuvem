@@ -1,16 +1,58 @@
-# play_nuvem
+# PlayNuvem
+![Badge Status](http://img.shields.io/static/v1?label=Status&message=Em%Desenvolvimento&color=GREEN&style=fleat)
 
-A new Flutter project.
+# Sobre o projeto
 
-## Getting Started
+PlayNuvem é uma aplicação reprodutor de filmes e TvShows de arquivos em nuvem storage pessoal, este projeto é um case de estudos e esta em fase de desenvolvimento, esta sendo utilizado consumo de Api rest, gestão de estado e injeção de dependência com packages provider, padrões de projetos com MVC, Repository pattern.
 
-This project is a starting point for a Flutter application.
+O PlayNuvem organiza as mídias pessoas com informações da biblioteca TMDB, como seções de recomendados, lançamentos e principais gêneros, centralizando as mídias a parti de um nuvem storage e reproduzindo direto no PlayNuvem.
 
-A few resources to get you started if this is your first Flutter project:
+# Tecnologias utilizadas
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Dart: 2.18.5
+- Flutter: 3.3.9
+- provider: 6.0.4
+- dio: 4.0.6
+- minio: 3.5.0
+- better_player: 0.0.82
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+# Como executar o projeto
+
+### Pré-requisitos: 
+
+- SDK Flutter instalado
+- Android studio instalado
+
+### Clonar repositório
+```bash
+git clone https://github.com/Jose-Alves92/PlayNuvem
+```
+
+### Entrar na pasta do projeto
+```bash
+cd PlayNuvem
+```
+
+### Instalar dependências
+```bash
+flutter pub get
+```
+
+### Executar o projeto
+Para executar o projeto deve ter um device conectado ou device emulator
+```bash
+flutter run
+```
+
+### Criar um release apk
+```bash
+flutter build apk --release
+```
+
+# Autor
+
+José Alves da Costa Filho
+
+https://www.linkedin.com/in/josealves92
+
