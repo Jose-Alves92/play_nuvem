@@ -3,9 +3,9 @@
 
 # Sobre o projeto
 
-PlayNuvem é uma aplicação reprodutor de filmes e TvShows de arquivos em nuvem storage pessoal, este projeto é um case de estudos e esta em fase de desenvolvimento, esta sendo utilizado consumo de Api rest, gestão de estado e injeção de dependência com packages provider, padrões de projetos com MVC, Repository pattern.
+PlayNuvem é um reprodutor de mídias de filmes e TvShows de arquivos em nuvem Storj pessoal, este projeto é um case de estudos e esta em fase de desenvolvimento, esta sendo utilizado consumo de Api rest, gestão de estado e injeção de dependência com packages provider, padrões de projetos com MVC, Repository pattern.
 
-O PlayNuvem organiza as mídias pessoas com informações da biblioteca TMDB, como seções de recomendados, lançamentos e principais gêneros, centralizando as mídias a parti de um nuvem storage e reproduzindo direto no PlayNuvem.
+O PlayNuvem organiza as mídias pessoas com informações da biblioteca TMDB, como seções de recomendados, lançamentos e principais gêneros, centralizando as mídias a parti de um nuvem Storj e reproduz direto no PlayNuvem.
 
 # Tecnologias utilizadas
 
@@ -52,7 +52,7 @@ flutter build apk --release
 
 # Autor
 
-José Alves da Costa Filho
+José Alves
 
 https://www.linkedin.com/in/josealves92
 
