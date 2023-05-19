@@ -28,7 +28,6 @@ class NuvemRepositoryImp implements NuvemRepository {
     final minio = Minio(endPoint: endPoint, accessKey: accessKey, secretKey: secretKey);
     final response = await minio.presignedGetObject(PathBucket, title, expires: 5 * 60 * 60);
     return response;
-    throw UnimplementedError();
   }
  
 }

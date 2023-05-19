@@ -36,7 +36,8 @@ class MidiaController with ChangeNotifier {
   Future<void> fetchRecommendations() async {
     try {
       //genres = await _moviesRepository.getGenres();
-      _moviesTrending = await _midiaRepository.getTrending('movie');
+      //_moviesTrending = await _midiaRepository.getTrending('movie');
+      _moviesTrending.add(await _midiaRepository.getTrending('movie'));
       _tvTrending = await _midiaRepository.getTrending('tv');
       //Assistido recentemente
       //Lista de Favoritos

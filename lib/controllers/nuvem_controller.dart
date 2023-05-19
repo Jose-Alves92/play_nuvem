@@ -19,8 +19,8 @@ class NuvemController with ChangeNotifier {
         name: 'Nuvem1',
         credenciais: Credentials(
             endPoint: 'gateway.storjshare.io',
-            accessKey: 'jveeoqxw266lkvvm3n7cweqheana',
-            secretKey: 'j2pgl3fbdovzemklukp2baxcr3auc54rmgq36gpavd2ybb3nv3h4u',
+            accessKey: const String.fromEnvironment('ACCESSKEY_STORJ'),
+            secretKey: const String.fromEnvironment('SECRETKEY_STORJ'),
             ),
         pathBucketMovies: 'demo-bucket',
         pathBucketTvShows: 'demo-bucket',
@@ -88,7 +88,7 @@ class NuvemController with ChangeNotifier {
 
   Future<void> fetchListReproduction(String titleSearch, String midiaType) async {
     for (var list in listNuvem) {
-      ListObjectsResult _lista = await _nuvemRepository.getListReproduction(
+      ListObjectsResult lista = await _nuvemRepository.getListReproduction(
         endPoint: list.credenciais.endPoint,
         accessKey: list.credenciais.accessKey,
         secretKey: list.credenciais.secretKey,
@@ -96,16 +96,16 @@ class NuvemController with ChangeNotifier {
         PathBucket: midiaType == 'movie' ? list.pathBucketMovies! : list.pathBucketTvShows!,
       );
 
-      if(_lista.objects.length > 1) {
-        for(var i = 0; i <= _lista.objects.length; i++) {
-        List<String> separated = _lista.objects[i].key!.split('_'); 
+      if(lista.objects.length > 1) {
+        for(var i = 0; i <= lista.objects.length; i++) {
+        List<String> separated = lista.objects[i].key!.split('_'); 
         
         // tt0944947_nomedoarquivo_2011_A+EN+PT_R720p.mp4
         String url = await _nuvemRepository.getUrl(
           endPoint: list.credenciais.endPoint, 
           accessKey: list.credenciais.accessKey, 
           secretKey: list.credenciais.secretKey, 
-          title: _lista.objects[i].key!, 
+          title: lista.objects[i].key!, 
           PathBucket: midiaType == 'movie' ? list.pathBucketMovies! : list.pathBucketTvShows!,
           ); 
           
@@ -113,20 +113,20 @@ class NuvemController with ChangeNotifier {
           ReproductionItems(
             tipoNuvem: list.tipo,
             nameNuvem: list.name,
-            title: _lista.objects[i].key!,
+            title: lista.objects[i].key!,
             resolution: separated[4].substring(1, 6),
             url: url,
           ),
         );
         }
-      } else if(_lista.objects.length == 1) {
-         List<String> separated = _lista.objects[0].key!.split('_'); 
+      } else if(lista.objects.length == 1) {
+         List<String> separated = lista.objects[0].key!.split('_'); 
         // tt0944947_nomedoarquivo_2011_A+EN+PT_R720p.mp4
         String url = await _nuvemRepository.getUrl(
           endPoint: list.credenciais.endPoint, 
           accessKey: list.credenciais.accessKey, 
           secretKey: list.credenciais.secretKey, 
-          title: _lista.objects[0].key!, 
+          title: lista.objects[0].key!, 
           PathBucket: midiaType == 'movie' ? list.pathBucketMovies! : list.pathBucketTvShows!,
           );  
             
@@ -134,7 +134,7 @@ class NuvemController with ChangeNotifier {
           ReproductionItems(
             tipoNuvem: list.tipo,
             nameNuvem: list.name,
-            title: _lista.objects[0].key!,
+            title: lista.objects[0].key!,
             resolution: separated[4].substring(1, 6),
             url: url,
           ),

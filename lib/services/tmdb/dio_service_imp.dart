@@ -11,7 +11,7 @@ class DioServiceImp implements HttpService {
                 'Bearer ${const String.fromEnvironment("TOKEN_TMDB")}',
         },
         queryParameters: {
-          'api_key': const String.fromEnvironment("APIKEY_TMD"),
+          'api_key': const String.fromEnvironment("APIKEY_TMDB"),
           'language': 'pt-BR',
         }
       ),

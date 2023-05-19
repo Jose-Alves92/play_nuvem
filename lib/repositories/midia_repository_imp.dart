@@ -16,7 +16,6 @@ class MidiaRepositoryImp implements MidiaRepository {
 
   @override
   Future<List<Genros>> getGenres(String midiaType) async {
-    // TODO: implement getGenres
       var response = await _httpService.get(ApiTmdbUtils.REQUEST_GENRES(midiaType));
       var data = GenresModel.fromJson(response);
       return data.genres;
@@ -31,37 +30,29 @@ class MidiaRepositoryImp implements MidiaRepository {
   
   @override
   Future<List<Midia>> getTrending(String mediaType) async {
-    // TODO: implement getTrending
     var response = await _httpService.get(ApiTmdbUtils.REQUEST_TRENDING(mediaType));
     MidiaModel data = MidiaModel.fromJson(response as Map<String, dynamic>);
     return data.listMidia;
-    throw UnimplementedError();
   }
   
   @override
   Future<MovieDetailModel> getDetailsMovie(String midiaId, String midiaType) async {
-    // TODO: implement getDetails
     var response = await _httpService.get(ApiTmdbUtils.REQUEST_DETAIL(midiaId, midiaType));
     MovieDetailModel data = MovieDetailModel.fromJson(response);
     return data;
-    throw UnimplementedError();
   }
   @override
   Future<TvShowsDetailsModel> getDetailsTv(String midiaId, String midiaType) async {
-    // TODO: implement getDetails
     var response = await _httpService.get(ApiTmdbUtils.REQUEST_DETAIL(midiaId, midiaType));
     TvShowsDetailsModel data = TvShowsDetailsModel.fromJson(response);
     return data;
-    throw UnimplementedError();
   }
   
   @override
   Future<String> getImdb(String midiaId, String midiaType) async {
-    // TODO: implement getImdb
     var response = await _httpService.get(ApiTmdbUtils.REQUEST_IMDB(midiaId, midiaType));
     ImdbIdModel data = ImdbIdModel.fromJson(response);
     return data.imdbId!;
-    throw UnimplementedError();
   }
   
   
