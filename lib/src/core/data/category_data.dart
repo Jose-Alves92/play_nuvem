@@ -1,5 +1,6 @@
-import 'package:play_nuvem/models/midia_model.dart';
-import 'package:play_nuvem/models/genres_model.dart';
+
+
+import '../../app/models/genres_model.dart';
 
 class CategoryData {
   final List<String> moviesGenresId = [

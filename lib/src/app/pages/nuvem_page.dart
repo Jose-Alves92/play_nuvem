@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:play_nuvem/components/my_clouds_component.dart';
-import 'package:play_nuvem/controllers/nuvem_controller.dart';
-import 'package:provider/provider.dart';
+
+import '../components/my_clouds_component.dart';
+
 
 class NuvemPage extends StatelessWidget {
   const NuvemPage({

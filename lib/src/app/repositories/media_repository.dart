@@ -1,7 +1,7 @@
 
-abstract class MidiaRepository {
+abstract class MediaRepository {
   getGenres(String midiaType);
-  getMidiaByGenres(String idGenre, String midiaType);
+  getMediaByGenres(String idGenre, String midiaType);
   getDetailsMovie(String midiaId, String midiaType);
   getDetailsTv(String midiaId, String midiaType);
   getTrending(String midiaType);

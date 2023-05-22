@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:play_nuvem/components/movies_tabbar_component.dart';
-import 'package:play_nuvem/components/recommendations_tabbar_component.dart';
-import 'package:play_nuvem/controllers/midia_controller.dart';
-import 'package:play_nuvem/data/category_data.dart';
-import 'package:provider/provider.dart';
+
+import '../components/movies_tabbar_component.dart';
+import '../components/recommendations_tabbar_component.dart';
+
 
 class VodPage extends StatefulWidget {
   const VodPage({

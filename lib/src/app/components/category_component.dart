@@ -1,34 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:play_nuvem/controllers/midia_controller.dart';
-import 'package:play_nuvem/models/midia_model.dart';
-import 'package:play_nuvem/models/movie_detail_model.dart';
-import 'package:play_nuvem/models/tvshows_details_model.dart';
-import 'package:play_nuvem/utils/api_tmdb_utils.dart';
-import 'package:play_nuvem/utils/app_routes.dart';
+
 import 'package:provider/provider.dart';
+
+import '../../core/utils/app_routes.dart';
+import '../../core/utils/app_url_tmdb.dart';
+import '../controllers/media_controller.dart';
+import '../models/media_model.dart';
+import '../models/movie_detail_model.dart';
+import '../models/tvshows_details_model.dart';
+
 
 class CategoryComponent extends StatelessWidget {
   final String titleGenre;
-  final List<Midia> listMidiasByGenres;
-  final String midiaType;
+  final List<Media> listMediasByGenres;
+  final String mediaType;
 
   const CategoryComponent({
     Key? key,
     required this.titleGenre,
-    required this.listMidiasByGenres, 
-    required this.midiaType,
+    required this.listMediasByGenres, 
+    required this.mediaType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final _midiaController = Provider.of<MidiaController>(context,);
+    final _mediaController = Provider.of<MediaController>(context,);
 
-    Future<Object> _getDetails(String midiaId, String midiaType) async {
-      if(midiaType == 'movie') {
-      MovieDetailModel? details = await _midiaController.fetchMovieDetails(midiaId, midiaType);
+    Future<Object> _getDetails(String mediaId, String mediaType) async {
+      if(mediaType == 'movie') {
+      MovieDetailModel? details = await _mediaController.fetchMovieDetails(mediaId, mediaType);
       return details!;
       } else {
-      TvShowsDetailsModel? details = await _midiaController.fetchTvDetails(midiaId, midiaType);
+      TvShowsDetailsModel? details = await _mediaController.fetchTvDetails(mediaId, mediaType);
       return details!;
       }
     }
@@ -59,17 +62,17 @@ class CategoryComponent extends StatelessWidget {
             child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemCount: listMidiasByGenres
+              itemCount: listMediasByGenres
                   .length, //moviesController.moviesGenreAction.length,
               itemBuilder: (context, int index) {
                 return InkWell(
                   onTap: () {
-                    _getDetails(listMidiasByGenres[index].id.toString(), midiaType).then((value) {
-                      if(midiaType == 'movie') {
+                    _getDetails(listMediasByGenres[index].id.toString(), mediaType).then((value) {
+                      if(mediaType == 'movie') {
                       Navigator.of(context).pushNamed(AppRoutes.MOVIE_DETAIL_PAGE,
                         arguments: value);
                       }
-                      if(midiaType == 'tv') {
+                      if(mediaType == 'tv') {
                         Navigator.of(context).pushNamed(AppRoutes.TV_DETAIL_PAGE,
                         arguments: value);
                       }
@@ -88,8 +91,8 @@ class CategoryComponent extends StatelessWidget {
                             borderRadius: BorderRadius.circular(5),
                             image: DecorationImage(
                               image: NetworkImage(
-                                ApiTmdbUtils.REQUEST_IMAGE(
-                                    listMidiasByGenres[index].posterPath ?? 'colocar url image erro'),
+                                AppUrlTmdb.REQUEST_IMAGE(
+                                    listMediasByGenres[index].posterPath ?? 'colocar url image erro'),
                               ),
                               fit: BoxFit.cover,
                               scale: 1.5,
@@ -100,7 +103,7 @@ class CategoryComponent extends StatelessWidget {
                         Text(
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
-                          listMidiasByGenres[index].title ?? 'Erro!',
+                          listMediasByGenres[index].title ?? 'Erro!',
                           style: const TextStyle(fontSize: 15),
                           maxLines: 2,
                         ),

@@ -1,10 +1,12 @@
-import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
-//import 'package:chewie/chewie.dart';
-//import 'package:flutter/services.dart';
-import 'package:play_nuvem/controllers/nuvem_controller.dart';
+
+import 'package:better_player/better_player.dart';
 import 'package:provider/provider.dart';
-//import 'package:video_player/video_player.dart';
+
+import '../controllers/nuvem_controller.dart';
+
+
+
 
 class VideoPlayerComponent extends StatefulWidget {
   const VideoPlayerComponent({super.key});

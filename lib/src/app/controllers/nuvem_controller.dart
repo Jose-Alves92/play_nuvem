@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+
 import 'package:minio/models.dart';
-import 'package:play_nuvem/models/nuvem_model.dart';
-import 'package:play_nuvem/models/reproduction_items.dart';
-import 'package:play_nuvem/repositories/midia_repository.dart';
-import 'package:play_nuvem/repositories/midia_repository_imp.dart';
-import 'package:play_nuvem/repositories/nuvem_repository.dart';
-import 'package:play_nuvem/repositories/nuvem_repository_imp.dart';
+
+import '../models/nuvem_model.dart';
+import '../models/reproduction_items.dart';
+import '../repositories/media_repository.dart';
+import '../repositories/media_repository_imp.dart';
+import '../repositories/nuvem_repository.dart';
+import '../repositories/nuvem_repository_imp.dart';
+
+
 
 class NuvemController with ChangeNotifier {
-  final NuvemRepository _nuvemRepository = NuvemRepositoryImp();
-  final MidiaRepository _midiaRepository = MidiaRepositoryImp();
-  List<ReproductionItems> _listReproductionItems = [];
+  final MediaRepository _midiaRepository = MediaRepositoryImp();
+  final NuvemRepository _nuvemRepository= NuvemRepositoryImp();
+  final List<ReproductionItems> _listReproductionItems = [];
   String _url = '';
   String _imdbId = '';
   final List<NuvemModel> _listNuvem = [

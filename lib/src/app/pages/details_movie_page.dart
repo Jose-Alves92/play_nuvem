@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:play_nuvem/components/video_player_component.dart';
-import 'package:play_nuvem/controllers/nuvem_controller.dart';
-import 'package:play_nuvem/models/tvshows_details_model.dart';
 import 'package:provider/provider.dart';
 
-class DetailsTvPage extends StatefulWidget {
-  final TvShowsDetailsModel tv;
-  const DetailsTvPage({
+import '../components/video_player_component.dart';
+import '../controllers/nuvem_controller.dart';
+import '../models/movie_detail_model.dart';
+
+class DetailsMoviePage extends StatefulWidget {
+  final MovieDetailModel movie;
+  const DetailsMoviePage({
     super.key,
-    required this.tv,
+    required this.movie,
   });
 
   @override
-  State<DetailsTvPage> createState() => _DetailsTvPageState();
+  State<DetailsMoviePage> createState() => _DetailsMoviePageState();
 }
 
-class _DetailsTvPageState extends State<DetailsTvPage> {
+class _DetailsMoviePageState extends State<DetailsMoviePage> {
+  Future<String> getUrl(BuildContext context) async {
+    var url2 = await Provider.of<NuvemController>(context, listen: false).url;
+    return url2;
+  }
+
   Widget? futureBuilder(BuildContext context) {
     final futureController =
         Provider.of<NuvemController>(context, listen: false);
     return FutureBuilder(
         future: futureController
-            .loadTvShows(widget.tv.id.toString())
+            .loadMovies(widget.movie.imdbId.toString())
             .then((_) => futureController.updateUrl()),
         builder: (context, snapshot) {
           return Container();
@@ -31,12 +37,12 @@ class _DetailsTvPageState extends State<DetailsTvPage> {
   @override
   void initState() {
     super.initState();
-    futureBuilder(context);
+    //futureBuilder(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    //final _mediaQuery = MediaQuery.of(context).size;
+    final _mediaQuery = MediaQuery.of(context).size;
     final _nuvemController = Provider.of<NuvemController>(context, listen: false);
     return Scaffold(
       //extendBodyBehindAppBar: true,
@@ -57,14 +63,8 @@ class _DetailsTvPageState extends State<DetailsTvPage> {
           children: [
             FutureBuilder(
               future: _nuvemController
-                  .loadTvShows(widget.tv.id.toString())
-                  .then((value) { 
-                    if(_nuvemController.listReproductionItems.isNotEmpty) {
-                    _nuvemController.updateUrl();
-                    } else {
-                      return;
-                    }
-                    },),
+                  .loadMovies(widget.movie.imdbId.toString())
+                  .then((value) => _nuvemController.updateUrl()),
               builder: (context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const AspectRatio(
@@ -103,7 +103,7 @@ class _DetailsTvPageState extends State<DetailsTvPage> {
                   Text(
                     overflow: TextOverflow.visible,
                     softWrap: true,
-                    widget.tv.name!,
+                    widget.movie.title!,
                     style: const TextStyle(
                       fontSize: 26,
                     ),
@@ -116,24 +116,30 @@ class _DetailsTvPageState extends State<DetailsTvPage> {
                         color: Colors.amber,
                       ),
                       Text(
-                        widget.tv.voteAverage!.toStringAsFixed(1),
+                        widget.movie.voteAverage!.toStringAsFixed(1),
                         style:
                             const TextStyle(color: Colors.amber, fontSize: 15),
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        '. ${widget.tv.firstAirDate} ',
+                        '. ${widget.movie.releaseDate} ',
                         style: const TextStyle(fontSize: 15),
                       ),
+                      Text(
+                        '. ${widget.movie.runtime} Minutos ',
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                      const SizedBox(width: 5),
+                      //Text('Data de Lançamento: ${widget.movie.releaseDate}'),
                     ],
                   ),
                   Text(
-                      'Gêneros: ${widget.tv.genres!.map((e) => e.name).join('/')}'),
+                      'Gêneros: ${widget.movie.genres!.map((e) => e.name).join('/')}'),
                   const SizedBox(height: 10),
                   const Text('Sinopse:', style: TextStyle(fontSize: 26)),
                   const SizedBox(height: 10),
                   Text(
-                    widget.tv.overview!,
+                    widget.movie.overview!,
                     style: const TextStyle(fontSize: 15),
                   ),
                 ],

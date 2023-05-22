@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:play_nuvem/controllers/nuvem_controller.dart';
+
 import 'package:provider/provider.dart';
+
+import '../controllers/nuvem_controller.dart';
 
 class MyCloudsComponent extends StatelessWidget {
   const MyCloudsComponent({
