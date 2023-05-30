@@ -15,7 +15,7 @@ class MoviesTabBarComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     final MediaController mediaController = Provider.of(context, listen: false);
     return FutureBuilder(
-      future: mediaController.fetchMovies(),
+      future: mediaController.moviesActionAdventure.isEmpty ? mediaController.fetchMovies() : null,
       builder: (context, snapshot) {
         if(snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator(),);

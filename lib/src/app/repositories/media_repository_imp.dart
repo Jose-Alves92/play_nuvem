@@ -33,7 +33,6 @@ class MediaRepositoryImp implements MediaRepository {
   @override
   Future<List<Media>> getMediaByGenres(String idGenre, String mediaType) async {
     var response = await _httpClient.get(AppUrlTmdb.REQUEST_MIDIA_BY_GENRES(idGenre, mediaType));
-    print(response.data);
     MediaModel data = MediaModel.fromJson(response.data as Map<String, dynamic>);
     return data.listMedia;
   }

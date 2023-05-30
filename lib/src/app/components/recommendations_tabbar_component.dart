@@ -13,38 +13,42 @@ class RecommendationsTabBarComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MediaController mediaController = Provider.of(context, listen: false);
-    return FutureBuilder(
-      future: mediaController.fetchRecommendations(),
-      builder: (context, snapshot) {
-        if(snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator(),);
-        }
-        if(snapshot.hasError) {
-          return Center(child: Text(' Ocorreu o seguinte erro: ${snapshot.hasError}'),);
-        }
-        return ListView(
-            padding: const EdgeInsets.only(
-              top: 20,
-              left: 20,
-              bottom: 10,
-              right: 0,
-            ),
-            shrinkWrap: true,
-            children: [
-              CategoryComponent(
-                titleGenre: 'Filmes em Tendências',
-                listMediasByGenres: mediaController.moviesTrending,
-                mediaType: 'movie',
+    final mediaController = context.watch<MediaController>();
+   
+    return RefreshIndicator(
+      onRefresh: () => mediaController.fetchRecommendations(),
+      child: FutureBuilder(
+        future: mediaController.moviesTrending.isEmpty ? mediaController.fetchRecommendations() : null,
+        builder: (context, snapshot) {
+          if(snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator(),);
+          }
+          if(snapshot.hasError) {
+            return Center(child: Text(' Ocorreu o seguinte erro: ${snapshot.hasError}'),);
+          }
+          return ListView(
+              padding: const EdgeInsets.only(
+                top: 20,
+                left: 20,
+                bottom: 10,
+                right: 0,
               ),
-              CategoryComponent(
-                titleGenre: 'Séries em Tendências',
-                listMediasByGenres: mediaController.tvTrending,
-                mediaType: 'tv',
-              ),
-            ],
-            );
-      },
+              shrinkWrap: true,
+              children: [
+                CategoryComponent(
+                  titleGenre: 'Filmes em Tendências',
+                  listMediasByGenres: mediaController.moviesTrending,
+                  mediaType: 'movie',
+                ),
+                CategoryComponent(
+                  titleGenre: 'Séries em Tendências',
+                  listMediasByGenres: mediaController.tvTrending,
+                  mediaType: 'tv',
+                ),
+              ],
+              );
+        },
+      ),
     );
   }
 }

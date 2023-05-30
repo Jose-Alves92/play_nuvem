@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import '../controllers/nuvem_controller.dart';
+import '../controllers/cloud_controller.dart';
 
 class MyCloudsComponent extends StatelessWidget {
   const MyCloudsComponent({
@@ -12,30 +12,32 @@ class MyCloudsComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _mediaQuery = MediaQuery.of(context);
-    final _nuvemController = Provider.of<NuvemController>(context);
+    Size size = MediaQuery.of(context).size;
+    final cloudController = Provider.of<CloudController>(context);
     return Container(
       padding: const EdgeInsets.all(10),
-      width: _mediaQuery.size.width,
-      height: _mediaQuery.size.height,
+      width: size.width,
+      height: size.height,
       child: ListView.builder(
-        itemCount: _nuvemController.listNuvem.length,
+        itemCount: cloudController.listNuvem.length,
         itemBuilder: (context, int index) => Card(
           child: ListTile(
             leading: const CircleAvatar(
               backgroundColor: Colors.blue,
             ),
-            title: Text(_nuvemController.listNuvem[index].name),
+            title: Text(cloudController.listNuvem[index].name),
             subtitle:
-                Text('Nuvem: ${_nuvemController.listNuvem[index].tipo}'),
+                Text('Nuvem: ${cloudController.listNuvem[index].tipo}'),
             trailing: SizedBox(
               width: 50,
               child: Row(
                 children: [
                   Text(
-                      _nuvemController.listNuvem[index].totalcountitems!),
-                  IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.delete)),
+                      cloudController.listNuvem[index].totalcountitems!),
+                  Expanded(
+                    child: IconButton(
+                        onPressed: () {}, icon: const Icon(Icons.delete)),
+                  ),
                 ],
               ),
             ),

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'controllers/media_controller.dart';
-import 'controllers/nuvem_controller.dart';
+import 'controllers/cloud_controller.dart';
+import 'models/media_model.dart';
 import 'models/movie_detail_model.dart';
 import 'models/tvshows_details_model.dart';
 import 'pages/details_movie_page.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: ((context) => MediaController()),
         ),
-        ChangeNotifierProvider(create: ((context) => NuvemController()),
+        ChangeNotifierProvider(create: ((context) => CloudController()),
         ),
       ],
       child: MaterialApp(
@@ -30,11 +31,11 @@ class MyApp extends StatelessWidget {
         home: const HomePage(),
         routes: {
           AppRoutes.MOVIE_DETAIL_PAGE:(context) {
-            final argMovie = ModalRoute.of(context)!.settings.arguments as MovieDetailModel;
-            return DetailsMoviePage(movie: argMovie,);
+            final argMovie = ModalRoute.of(context)!.settings.arguments as Media;
+            return DetailsMoviePage(movie: argMovie);
             },
           AppRoutes.TV_DETAIL_PAGE:(context) {
-            final argTv = ModalRoute.of(context)!.settings.arguments as TvShowsDetailsModel;
+            final argTv = ModalRoute.of(context)!.settings.arguments as Media;
             return DetailsTvPage(tv: argTv,);
             }
         },

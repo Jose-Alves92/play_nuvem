@@ -11,12 +11,16 @@ import '../repositories/nuvem_repository_imp.dart';
 
 
 
-class NuvemController with ChangeNotifier {
+class CloudController with ChangeNotifier {
   final MediaRepository _midiaRepository = MediaRepositoryImp();
   final NuvemRepository _nuvemRepository= NuvemRepositoryImp();
+
   final List<ReproductionItems> _listReproductionItems = [];
+
   String _url = '';
+
   String _imdbId = '';
+
   final List<NuvemModel> _listNuvem = [
     NuvemModel(
         tipo: 'Storj',
@@ -32,6 +36,7 @@ class NuvemController with ChangeNotifier {
         totalcountitems: '0'),
     //Random(10).nextDouble().toString()
   ];
+
   List<String> listateste = [
     'https://edisciplinas.usp.br/pluginfile.php/5196097/mod_resource/content/1/Teste.mp4',
     'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',

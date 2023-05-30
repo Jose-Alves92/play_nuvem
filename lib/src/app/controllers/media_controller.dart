@@ -9,7 +9,7 @@ import '../repositories/media_repository_imp.dart';
 
 class MediaController with ChangeNotifier {
   final MediaRepository _mediaRepository = MediaRepositoryImp();
-  //final CategoryData _categoryData = CategoryData();
+
   MediaController();
 
   List<Genros> genres = [];
@@ -36,12 +36,12 @@ class MediaController with ChangeNotifier {
 
   Future<void> fetchRecommendations() async {
     try {
-      //genres = await _moviesRepository.getGenres();
       _moviesTrending = await _mediaRepository.getTrending('movie');
     
       _tvTrending = await _mediaRepository.getTrending('tv');
       //Assistido recentemente
       //Lista de Favoritos
+      print('Esta chamando');
       notifyListeners(); 
     } catch(error, stackTrace) {
      print("Exception occured: $error by $stackTrace");
