@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:play_nuvem/src/app/app_widget.dart';
+import 'package:play_nuvem/src/features/app_widget.dart';
 
 
 
