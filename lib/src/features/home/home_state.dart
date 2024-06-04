@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:play_nuvem/src/shared/models/category_model.dart';
+import 'package:play_nuvem/src/shared/models/home_content.dart';
 
 enum HomeStatus {
   initial,
@@ -10,23 +10,23 @@ enum HomeStatus {
 
 class HomeState {
   HomeStatus status;
-  List<CategoryModel> categories;
+  HomeContent? homeContent;
   HomeState({
     required this.status,
-    required this.categories,
+    this.homeContent,
   });
 
   factory HomeState.initial() {
-    return HomeState(status: HomeStatus.initial, categories: []);
+    return HomeState(status: HomeStatus.initial);
   }
 
   HomeState copyWith({
     HomeStatus? status,
-    List<CategoryModel>? categories,
+    HomeContent? homeContent,
   }) {
     return HomeState(
       status: status ?? this.status,
-      categories: categories ?? this.categories,
+      homeContent: homeContent ?? this.homeContent,
     );
   }
 }

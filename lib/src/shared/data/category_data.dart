@@ -3,9 +3,9 @@ import '../models/category_model.dart';
 
 
   final List<CategoryModel> homeCategories = [
-    CategoryModel(name: 'Em Tendência'),
-    CategoryModel(name: 'Popular : filmes'),
-    CategoryModel(name: 'Popular : series'),
+    CategoryModel(name: 'Em Tendência : All!', medias: []),
+    CategoryModel(name: 'Em Tendência : filmes',  medias: []),
+    CategoryModel(name: 'Em Tendência : series',  medias: []),
   ];
 
   final List<CategoryModel> moviesCategories = [

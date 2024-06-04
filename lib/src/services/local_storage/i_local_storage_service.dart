@@ -1,4 +1,4 @@
-abstract class ILocalStorage {
+abstract class ILocalStorageService {
 
   Future<bool> saveString(String key, String value);
 

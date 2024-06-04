@@ -2,11 +2,11 @@ import 'dart:convert';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-class PlaylistModel {
+class Playlist {
    String id;
    String name;
    String url;
-  PlaylistModel({
+  Playlist({
     required this.id,
     required this.name,
     required this.url,
@@ -20,8 +20,8 @@ class PlaylistModel {
     };
   }
 
-  factory PlaylistModel.fromMap(Map<String, dynamic> map) {
-    return PlaylistModel(
+  factory Playlist.fromMap(Map<String, dynamic> map) {
+    return Playlist(
       id: map['id'] as String,
       name: map['name'] as String,
       url: map['url'] as String,
@@ -30,5 +30,5 @@ class PlaylistModel {
 
   String toJson() => json.encode(toMap());
 
-  factory PlaylistModel.fromJson(String source) => PlaylistModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Playlist.fromJson(String source) => Playlist.fromMap(json.decode(source) as Map<String, dynamic>);
 }

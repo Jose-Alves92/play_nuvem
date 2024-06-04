@@ -36,13 +36,13 @@ class _HomeBottomBarState extends State<HomeBottomBar> {
             label: 'Home'
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.cloud, color: Colors.white),
-            activeIcon: Icon(Icons.cloud, color: AppColors.primaryColor),
+            icon: Icon(Icons.movie_outlined, color: Colors.white),
+            activeIcon: Icon(Icons.movie_outlined, color: AppColors.primaryColor),
             label: 'Filmes',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite, color: Colors.white),
-            activeIcon: Icon(Icons.favorite, color: AppColors.primaryColor),
+            icon: Icon(Icons.movie_creation, color: Colors.white),
+            activeIcon: Icon(Icons.movie_creation, color: AppColors.primaryColor),
             label: 'Series',
           ),
           
