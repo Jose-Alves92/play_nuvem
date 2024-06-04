@@ -1,4 +1,5 @@
 class AppRoutes {
-  static const MOVIE_DETAIL_PAGE = '/details-movies';
-  static const TV_DETAIL_PAGE = '/details-tv';
+  static const SPLASH_SCREEN = '/';
+  static const HOME_PAGE = '/home';
+  static const MEDIA_DETAILS_PAGE = '/media_details';
 }

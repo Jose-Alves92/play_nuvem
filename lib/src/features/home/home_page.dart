@@ -1,57 +1,74 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:play_nuvem/src/features/home/home_controller.dart';
+import 'package:play_nuvem/src/features/home/home_state.dart';
+import 'package:play_nuvem/src/features/home/services/home_service.dart';
+import 'package:play_nuvem/src/repositories/tmdb/tmdb_repository.dart';
+import 'package:play_nuvem/src/services/http_client/dio_service_imp.dart';
+import 'package:play_nuvem/src/services/http_client/http_client_service.dart';
+import 'package:play_nuvem/src/shared/utils/app_url_tmdb.dart';
+import 'package:play_nuvem/src/shared/widgets/category_widget.dart';
 
-import '../cloud/cloud_page.dart';
-import '../favorites/favorites_page.dart';
-import '../profile_page.dart';
-import '../vod/vod_page.dart';
+class HomePage extends StatelessWidget {
+  HomePage({super.key});
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _indexBottomItem = 0;
+  final controller = HomeController(
+    HomeService(
+      tmdbRepository: TmdbRepository(
+        httpClientService: DioServiceImp(
+          BaseOptionsHttp(
+            baseUrl: AppUrlTmdb.BASE_URL,
+            headers: AppUrlTmdb.HEADERS,
+            queryParameters: AppUrlTmdb.QUERY_PARAMETERS,
+          ),
+        ),
+      ),
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _indexBottomItem,
-        children: const [
-          VodPage(),
-          CloudPage(),
-          FavoritesPage(),
-          ProfilePage(),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _indexBottomItem,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.slow_motion_video),
-            label: 'Vod',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.cloud),
-            label: 'Nuvem',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favoritos',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
-          ),
-        ],
-        onTap: (idx) {
-          setState(() {
-            _indexBottomItem = idx;
-          });
+      backgroundColor: Colors.black,
+      appBar: AppBar(),
+      body: ListenableBuilder(
+        listenable: controller,
+        builder: (context, child) {
+          if (controller.state.status == HomeStatus.loading) {
+          
+            return const Center(child: CircularProgressIndicator());
+          } else if (controller.state.status == HomeStatus.error) {
+           
+            return const Center(
+              child: Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Text('Ocorreu o seguinte error'),
+              ),
+            );
+          } else if (controller.state.status == HomeStatus.success) {
+            var listMedias = controller.state.categories;
+          
+            return RefreshIndicator(
+              onRefresh: () => controller.fetch(),
+              child: ListView.separated(
+                padding: const EdgeInsets.only(
+                  top: 20,
+                  left: 20,
+                  bottom: 10,
+                  right: 0,
+                ),
+                shrinkWrap: true,
+                physics: const ScrollPhysics(),
+                separatorBuilder: (_, index) => const SizedBox(height: 10),
+                itemCount: listMedias.length,
+                itemBuilder: (_, index) => CategoryWidget(
+                  titleGenre: listMedias[index].name,
+                  medias: listMedias[index].medias ?? [],
+                ),
+              ),
+            );
+          }
+          return Container();
         },
       ),
     );
