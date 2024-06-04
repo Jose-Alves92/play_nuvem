@@ -39,7 +39,7 @@ class ResponseClient {
    
   });
 
-  Map<String, dynamic>? data;
+  dynamic data;
   int? statusCode;
   String? statusMessage;
 

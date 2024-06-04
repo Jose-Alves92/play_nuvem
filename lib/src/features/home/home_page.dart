@@ -2,43 +2,62 @@
 import 'package:flutter/material.dart';
 import 'package:play_nuvem/src/features/home/home_controller.dart';
 import 'package:play_nuvem/src/features/home/home_state.dart';
-import 'package:play_nuvem/src/features/home/services/home_service.dart';
-import 'package:play_nuvem/src/repositories/tmdb/tmdb_repository.dart';
-import 'package:play_nuvem/src/services/http_client/dio_service_imp.dart';
-import 'package:play_nuvem/src/services/http_client/http_client_service.dart';
-import 'package:play_nuvem/src/shared/utils/app_url_tmdb.dart';
+import 'package:play_nuvem/src/features/home/widgets/trendingSlider.dart';
+import 'package:play_nuvem/src/shared/locator/locator_services.dart';
+import 'package:play_nuvem/src/shared/ui/styles/app_colors.dart';
+import 'package:play_nuvem/src/shared/ui/styles/app_text_style.dart';
+import 'package:play_nuvem/src/shared/utils/app_routes.dart';
 import 'package:play_nuvem/src/shared/widgets/category_widget.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
-  final controller = HomeController(
-    HomeService(
-      tmdbRepository: TmdbRepository(
-        httpClientService: DioServiceImp(
-          BaseOptionsHttp(
-            baseUrl: AppUrlTmdb.BASE_URL,
-            headers: AppUrlTmdb.HEADERS,
-            queryParameters: AppUrlTmdb.QUERY_PARAMETERS,
-          ),
-        ),
-      ),
-    ),
-  );
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final controller = getIt.get<HomeController>();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.fetch();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.search_rounded))
+        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(color: AppColors.primaryColor),
+              child: Text('Drawer'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.movie),
+              title: const Text('Playlist'),
+              onTap: () =>
+                  Navigator.popAndPushNamed(context, AppRoutes.PLAYLIST_PAGE),
+            )
+          ],
+        ),
+      ),
       body: ListenableBuilder(
         listenable: controller,
         builder: (context, child) {
           if (controller.state.status == HomeStatus.loading) {
-          
             return const Center(child: CircularProgressIndicator());
           } else if (controller.state.status == HomeStatus.error) {
-           
             return const Center(
               child: Padding(
                 padding: EdgeInsets.all(20.0),
@@ -46,29 +65,42 @@ class HomePage extends StatelessWidget {
               ),
             );
           } else if (controller.state.status == HomeStatus.success) {
-            var listMedias = controller.state.categories;
-          
+            var content = controller.state.homeContent!;
+
             return RefreshIndicator(
               onRefresh: () => controller.fetch(),
-              child: ListView.separated(
-                padding: const EdgeInsets.only(
-                  top: 20,
-                  left: 20,
-                  bottom: 10,
-                  right: 0,
-                ),
-                shrinkWrap: true,
-                physics: const ScrollPhysics(),
-                separatorBuilder: (_, index) => const SizedBox(height: 10),
-                itemCount: listMedias.length,
-                itemBuilder: (_, index) => CategoryWidget(
-                  titleGenre: listMedias[index].name,
-                  medias: listMedias[index].medias ?? [],
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 20),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 8),
+                      child: Text('Trending week',
+                          style: AppTextStyle.titleMedium),
+                    ),
+                    const SizedBox(height: 10),
+                    TrendingSlider(
+                      medias: content.trending,
+                    ),
+                    const SizedBox(height: 20),
+                    CategoryWidget(
+                      title: 'Popular : filmes',
+                      medias: content.popularMovie,
+                    ),
+                    const SizedBox(height: 20),
+                    CategoryWidget(
+                      title: 'Popular : series',
+                      medias: content.popularTv,
+                    ),
+                  ],
                 ),
               ),
             );
+          } else {
+            return const SizedBox();
           }
-          return Container();
         },
       ),
     );

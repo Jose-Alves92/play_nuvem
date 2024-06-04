@@ -1,8 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'i_local_storage.dart';
+import 'i_local_storage_service.dart';
 
-class LocalStorageImp implements ILocalStorage {
+class LocalStorageServiceImp implements ILocalStorageService {
  
   
   @override

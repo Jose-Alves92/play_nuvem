@@ -21,7 +21,8 @@ class AppUrlTmdb {
   static String image(String pathImage) => 'https://image.tmdb.org/t/p/w200$pathImage';
 
   static String allTrending = 'trending/all/week';
-  static String trending(String midiaType) => 'trending/$midiaType/week';
+  static String trending(String mediaType) => 'trending/$mediaType/week';
+  
   static String popularMovie = 'movie/popular';
   static String popularTv = 'tv/popular';
   
