@@ -3,11 +3,11 @@ import 'dart:convert';
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 class Playlist {
-   String id;
+   String? id;
    String name;
    String url;
   Playlist({
-    required this.id,
+    this.id,
     required this.name,
     required this.url,
   });
@@ -22,7 +22,7 @@ class Playlist {
 
   factory Playlist.fromMap(Map<String, dynamic> map) {
     return Playlist(
-      id: map['id'] as String,
+      id: map['id'],
       name: map['name'] as String,
       url: map['url'] as String,
     );

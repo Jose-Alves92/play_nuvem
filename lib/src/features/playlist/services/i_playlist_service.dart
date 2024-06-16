@@ -1,10 +1,11 @@
 
-import 'package:play_nuvem/src/shared/models/m3u/playlist.dart';
+import 'package:play_nuvem/src/models/m3u/playlist.dart';
 
 abstract class IPlaylistService {
  
 
   Future<List<Playlist>> fetch();
 
- Future<List<Playlist>> addPlaylist(Playlist playlist);
+ Future<bool> addPlaylist(Playlist playlist);
+ Future<bool> removePlaylist(Playlist playlist);
 }

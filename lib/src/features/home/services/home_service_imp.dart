@@ -7,9 +7,9 @@ import 'package:play_nuvem/src/repositories/media_info/i_media_info_repository.d
 import 'package:play_nuvem/src/services/local_storage/i_local_storage_service.dart';
 import 'package:play_nuvem/src/services/m3u_generate_content/I_m3u_generate-content_service.dart';
 import 'package:play_nuvem/src/shared/data/category_data.dart';
-import 'package:play_nuvem/src/shared/models/category_model.dart';
-import 'package:play_nuvem/src/shared/models/home_content.dart';
-import 'package:play_nuvem/src/shared/models/media_details.dart';
+import 'package:play_nuvem/src/models/category_model.dart';
+import 'package:play_nuvem/src/models/home_content.dart';
+import 'package:play_nuvem/src/models/media_details.dart';
 
 class HomeServiceImp implements IHomeService {
   List<CategoryModel> categories = homeCategories;

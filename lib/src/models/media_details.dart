@@ -1,5 +1,4 @@
-
-                // ignore_for_file: public_member_api_docs, sort_constructors_first
+               // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 class MediaDetails {
   bool? adult;
@@ -19,11 +18,12 @@ class MediaDetails {
   List<Seasons>? seasons;
   double? voteAverage;
   int? voteCount;
-  List<String> links;
-  bool isAvailable;
+  List<String>? links;
+  bool? isAvailable;
 
   MediaDetails(
-      {this.adult,
+      {
+      this.adult,
       this.backdropPath,
       this.firstAirDate,
       this.genres,
@@ -40,26 +40,26 @@ class MediaDetails {
       this.seasons,
       this.voteAverage,
       this.voteCount,
-      this.links = const[],
-      this.isAvailable = false,
+      this.links,
+      this.isAvailable,
       });
 
   factory MediaDetails.fromMap(Map<String, dynamic> map) {
     return MediaDetails(
-      adult: map['adult'],
-      backdropPath: map['backdrop_path'],
+      adult: map['adult'] ?? false,
+      backdropPath: map['backdrop_path'] ?? '',
       firstAirDate: map['first_air_date'] ?? map['release_date'],
       genres: map['genres']?.map<Genres>((g) => Genres.fromMap(g as Map<String, dynamic>)).toList(),
-      id: map['id'],
-      mediaType: map['media_type'],
+      id: map['id'] ?? '',
+      mediaType: map['media_type'] ?? '',
       name: map['name'] ?? map['title'],
       numberOfEpisodes: map['number_of_episodes'],
       numberOfSeasons: map['number_of_seasons'],
       runtime: map['runtime'],
       originalName: map['original_name'] ?? map['original_title'],
-      overview: map['overview'],
+      overview: map['overview'] ?? '',
       popularity: map['popularity'],
-      posterPath: map['poster_path'],
+      posterPath: map['poster_path'] ?? '',
       seasons: map['seasons']?.map<Seasons>((s) => Seasons.fromMap(s as Map<String, dynamic>)).toList(),
       voteAverage: map['vote_average'],
       voteCount: map['vote_count'],
@@ -140,19 +140,26 @@ class Genres {
   int? id;
   String? name;
 
-  Genres({this.id, this.name});
+  Genres({
+    this.id, 
+    this.name
+    });
 
-  Genres.fromMap(Map<String, dynamic> map) {
-    id = map['id'];
-    name = map['name'];
-  }
 
   Map<String, dynamic> toMap() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    return data;
+    return <String, dynamic>{
+      'id': id,
+      'name': name,
+    };
   }
+
+  factory Genres.fromMap(Map<String, dynamic> map) {
+    return Genres(
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+    );
+  }
+
 }
 
 class Seasons {
@@ -167,7 +174,8 @@ class Seasons {
   List<Episode>? episodes;
 
   Seasons(
-      {this.airDate,
+      {
+      this.airDate,
       this.episodeCount,
       this.id,
       this.name,
@@ -178,16 +186,18 @@ class Seasons {
       this.episodes,
       });
 
-  Seasons.fromMap(Map<String, dynamic> map) {
-    airDate = map['air_date'];
-    episodeCount = map['episode_count'];
-    id = map['id'];
-    name = map['name'];
-    overview = map['overview'];
-    posterPath = map['poster_path'];
-    seasonNumber = map['season_number'];
-    voteAverage = map['vote_average'];
-    episodes = map['episodes']?.map<Episode>((s) => Episode.fromMap(s as Map<String, dynamic>)).toList();
+  factory Seasons.fromMap(Map<String, dynamic> map) {
+    return Seasons(
+    airDate: map['air_date'] ?? '',
+    episodeCount: map['episode_count'],
+    id: map['id'] ?? '',
+    name: map['name'] ?? '',
+    overview: map['overview'] ?? '',
+    posterPath: map['poster_path'] ?? '',
+    seasonNumber: map['season_number'],
+    voteAverage: map['vote_average'],
+    episodes: map['episodes']?.map<Episode>((s) => Episode.fromMap(s as Map<String, dynamic>)).toList(),
+    );
   }
 
   Map<String, dynamic> toMap() {
@@ -239,7 +249,7 @@ class Episode {
   int? seasonNumber;
   String? stillPath;
   double? voteAverage;
-  List<String> links;
+  List<String>? links;
 
   Episode({
     this.episodeNumber,
@@ -251,7 +261,7 @@ class Episode {
     this.seasonNumber,
     this.stillPath,
     this.voteAverage,
-    this.links = const []
+    this.links,
   });
 
   Map<String, dynamic> toMap() {
@@ -274,13 +284,13 @@ class Episode {
   factory Episode.fromMap(Map<String, dynamic> map) {
     return Episode(
       episodeNumber: map['episode_number'],
-      id: map['id'],
-      name: map['name'],
-      overview: map['overview'],
-      productionCode: map['production_code'],
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+      overview: map['overview'] ?? '',
+      productionCode: map['production_code'] ?? '',
       runtime: map['runtime'],
       seasonNumber: map['season_number'],
-      stillPath: map['still_path'],
+      stillPath: map['still_path'] ?? '',
       voteAverage: map['vote_average'],
       links: List<String>.from(map['links'] ?? []),
     );

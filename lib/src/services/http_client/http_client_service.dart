@@ -5,7 +5,7 @@ abstract class HttpClientService {
     this.baseOptionsHttp,
   });
 
- get(String url);
+ Future<ResponseClient> get(String url);
 }
 
 class BaseOptionsHttp {
@@ -18,3 +18,17 @@ class BaseOptionsHttp {
     this.queryParameters,
   });
 }
+
+class ResponseClient {
+  ResponseClient({
+    this.data,
+    this.statusCode,
+    this.statusMessage,
+   
+  });
+
+  dynamic data;
+  int? statusCode;
+  String? statusMessage;
+
+} 

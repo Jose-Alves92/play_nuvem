@@ -28,53 +28,36 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text('PlayNuvem', style: AppTextStyle.titleLarge),
-            ListenableBuilder(
-                listenable: controller,
-                builder: (context, child) {
-                  if (controller.state is SplashLoading) {
-                    return const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(),
-                        SizedBox(height: 10),
-                        Text('Carregando dados...')
-                      ],
-                    );
-                  } else if (controller.state is SplashError) {
-                    Future.delayed(const Duration(seconds: 3), () {
-                      Navigator.popAndPushNamed(context, AppRoutes.HOME_PAGE);
-                    });
-                    return const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(height: 10),
-                        Text('Ocorreu algum erro ao carregar playlist!')
-                      ],
-                    );
-                  } else if(controller.state is SplashLoaded) {
-                    Future.delayed(const Duration(seconds: 5), () {
-                      Navigator.popAndPushNamed(context, AppRoutes.HOME_PAGE);
-                    });
-                    return const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [SizedBox(height: 10), Text('Dados carregados!')],
-                    );
-                  } else {
-                    return const SizedBox();
-                  }
-                },
-              ),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Text('PlayNuvem', style: AppTextStyle.titleLarge, textAlign: TextAlign.center),
+          ListenableBuilder(
+              listenable: controller,
+              builder: (context, child) {
+                if (controller.state is SplashLoading) {
+                  return const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                         height: 20,
+                      ),
+                      CircularProgressIndicator(),
+                      SizedBox(height: 10),
+                      Text('Carregando dados...')
+                    ],
+                  );
+                } else {
+                  Future.delayed(const Duration(seconds: 3), () {
+                    Navigator.popAndPushNamed(context, AppRoutes.HOME_PAGE);
+                  });
+                  return const SizedBox();
+                }
+              },
+            ),
+        ],
       ),
     );
   }

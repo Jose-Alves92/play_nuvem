@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:play_nuvem/src/features/home/services/i_home_service.dart';
-import 'package:play_nuvem/src/shared/models/home_content.dart';
+import 'package:play_nuvem/src/models/home_content.dart';
 
 import 'home_state.dart';
 
@@ -25,6 +25,7 @@ class HomeController with ChangeNotifier {
       HomeContent content = await _homeService.fetch();
 
       changeState(state.copyWith(status: HomeStatus.success, homeContent: content));
+      //changeState(state.copyWith(status: HomeStatus.error, homeContent: content));
     } catch (error, stackTrace) {
 
       changeState(state.copyWith(status: HomeStatus.error));

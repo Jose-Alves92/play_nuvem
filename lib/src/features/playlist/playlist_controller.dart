@@ -1,11 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
-import 'package:play_nuvem/src/features/home/home_controller.dart';
 import 'package:play_nuvem/src/features/playlist/playlist_state.dart';
 import 'package:play_nuvem/src/features/playlist/services/i_playlist_service.dart';
-import 'package:play_nuvem/src/shared/locator/locator_services.dart';
-import 'package:play_nuvem/src/shared/models/m3u/playlist.dart';
+import 'package:play_nuvem/src/models/m3u/playlist.dart';
 
 class PlaylistController extends ChangeNotifier{
   final IPlaylistService _playlistService;
@@ -31,14 +29,29 @@ class PlaylistController extends ChangeNotifier{
     }
   }
 
-  Future<void> updatePlaylist(Playlist playlist) async{
+  Future<bool> addPlaylist(Playlist playlist) async{
     changeState(PlaylistLoading());
     try {
-      var list = await _playlistService.addPlaylist(playlist);
+      var isSave= await _playlistService.addPlaylist(playlist);
+      var list = await _playlistService.fetch();
+
       changeState(PlaylistSuccess(playlist: list));
+      return isSave;
+    } catch (error, stackTrace) {
+      changeState(PlaylistError());
+      throw Exception('Exception occurred: $error by $stackTrace');
+    }
+  }
 
-      getIt.get<HomeController>().fetch();
+  Future<bool> removePlaylist(Playlist playlist) async{
+    changeState(PlaylistLoading());
+    try {
+      var isSave= await _playlistService.removePlaylist(playlist);
+      var list = await _playlistService.fetch();
 
+
+      changeState(PlaylistSuccess(playlist: list));
+      return isSave;
     } catch (error, stackTrace) {
       changeState(PlaylistError());
       throw Exception('Exception occurred: $error by $stackTrace');

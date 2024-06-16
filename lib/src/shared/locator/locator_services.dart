@@ -6,6 +6,7 @@ import 'package:play_nuvem/src/features/playlist/playlist_controller.dart';
 import 'package:play_nuvem/src/features/playlist/services/i_playlist_service.dart';
 import 'package:play_nuvem/src/features/playlist/services/playlist_service_imp.dart';
 import 'package:play_nuvem/src/features/splash/splash_controller.dart';
+import 'package:play_nuvem/src/features/update_medias/update_medias_controller.dart';
 import 'package:play_nuvem/src/repositories/media_info/i_media_info_repository.dart';
 import 'package:play_nuvem/src/repositories/media_info/tmdb_repository.dart';
 import 'package:play_nuvem/src/services/http_client/dio_service_imp.dart';
@@ -31,7 +32,7 @@ setup() {
   getIt.registerSingleton<ILocalStorageService>(LocalStorageServiceImp());
 
   getIt.registerSingleton<IM3uGenerateContentService>(
-      M3uGenerateContentServiceImp(getIt.get<ILocalStorageService>()));
+      M3uGenerateContentServiceImp(getIt.get<ILocalStorageService>(), getIt.get<HttpClientService>()));
 
   getIt.registerSingleton<SplashController>(
     SplashController(getIt.get<IM3uGenerateContentService>()),
@@ -49,8 +50,11 @@ setup() {
       HomeController(getIt.get<IHomeService>()));
 
   getIt.registerSingleton<IPlaylistService>(
-      PlaylistServiceImp(getIt.get<ILocalStorageService>(), getIt.get<IM3uGenerateContentService>()));
+      PlaylistServiceImp(getIt.get<ILocalStorageService>(), getIt.get<HttpClientService>()));
 
   getIt.registerSingleton<PlaylistController>(
       PlaylistController(getIt.get<IPlaylistService>()));
+
+
+  getIt.registerSingleton<UpdateMediasController>(UpdateMediasController());
 }

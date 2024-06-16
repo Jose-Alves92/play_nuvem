@@ -1,12 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:play_nuvem/src/shared/models/media_details.dart';
+import 'package:play_nuvem/src/models/media_details.dart';
 
 class HomeContent {
-  String date;
-  List<MediaDetails> trending;
-  List<MediaDetails> popularMovie;
-  List<MediaDetails> popularTv;
+  final String date;
+  final List<MediaDetails> trending;
+  final List<MediaDetails> popularMovie;
+  final List<MediaDetails> popularTv;
   HomeContent({
     required this.date,
     required this.trending,

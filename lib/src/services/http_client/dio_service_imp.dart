@@ -30,17 +30,3 @@ class DioServiceImp implements HttpClientService {
 }
 
 
-
-class ResponseClient {
-  ResponseClient({
-    this.data,
-    this.statusCode,
-    this.statusMessage,
-   
-  });
-
-  dynamic data;
-  int? statusCode;
-  String? statusMessage;
-
-}  

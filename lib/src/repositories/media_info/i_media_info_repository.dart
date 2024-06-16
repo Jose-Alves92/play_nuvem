@@ -1,4 +1,4 @@
-import 'package:play_nuvem/src/shared/models/media_details.dart';
+import 'package:play_nuvem/src/models/media_details.dart';
 
 abstract class IMediaInfoRepository {
 

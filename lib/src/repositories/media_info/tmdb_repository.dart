@@ -1,9 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:play_nuvem/src/repositories/media_info/i_media_info_repository.dart';
-import 'package:play_nuvem/src/services/http_client/dio_service_imp.dart';
 import 'package:play_nuvem/src/services/http_client/http_client_service.dart';
-import 'package:play_nuvem/src/shared/models/media_details.dart';
+import 'package:play_nuvem/src/models/media_details.dart';
 import 'package:play_nuvem/src/shared/utils/app_url_tmdb.dart';
 
 class TmdbRepository implements IMediaInfoRepository{

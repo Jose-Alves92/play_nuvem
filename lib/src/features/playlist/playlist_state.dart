@@ -1,5 +1,5 @@
 
-import 'package:play_nuvem/src/shared/models/m3u/playlist.dart';
+import 'package:play_nuvem/src/models/m3u/playlist.dart';
 
 abstract class PlaylistState {
   List<Playlist> playlist = [];

@@ -2,7 +2,7 @@
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 
-import '../utils/app_url_tmdb.dart';
+import '../../utils/app_url_tmdb.dart';
 
 
 class VideoPlayerWidget extends StatefulWidget {
