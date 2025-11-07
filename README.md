@@ -3,9 +3,9 @@
 
 # Sobre o projeto
 
-PlayNuvem é um reprodutor de mídias de filmes e TvShows de arquivos em nuvem Storj pessoal, este projeto é um case de estudos e esta em fase de desenvolvimento, esta sendo utilizado consumo de Api rest, gestão de estado e injeção de dependência com packages provider, padrões de projetos com MVC, Repository pattern.
+O PlayNuvem é um reprodutor de mídia que permite assistir a filmes e séries diretamente do seu armazenamento em nuvem pessoal. Trata-se de um projeto de estudo, atualmente em fase de desenvolvimento.
 
-O PlayNuvem organiza as mídias pessoas com informações da biblioteca TMDB, como seções de recomendados, lançamentos e principais gêneros, centralizando as mídias a parti de um nuvem Storj e reproduz direto no PlayNuvem.
+O PlayNuvem exibi as mídias com informações da biblioteca TMDB, como seções de recomendados, lançamentos e principais gêneros, e como fonte de mídias reprodutora conecta a parti do armazemamento em nuvem pessoal do Google Drive e reproduz direto no PlayNuvem.
 
 # Tecnologias utilizadas
 
